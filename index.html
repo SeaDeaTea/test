@@ -3,418 +3,729 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dravet Syndrome — Emergency Info</title>
+  <title>Living With Dravet Syndrome</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,300&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream: #fdf8f2;
-      --warm-white: #fff9f4;
-      --ink: #1a1208;
-      --muted: #6b5e4e;
-      --accent: #d95f2b;
-      --accent-light: #f4e4d8;
-      --safe: #2a7a4b;
-      --safe-light: #d8f0e3;
-      --warn: #b84a1e;
-      --warn-light: #fdeee8;
-      --border: #e8ddd0;
-      --shadow: 0 2px 16px rgba(26,18,8,0.08);
+      --bg: #f7f3ee;
+      --surface: #ffffff;
+      --ink: #1c1712;
+      --muted: #6a5f52;
+      --faint: #e8e1d8;
+      --purple: #5b4a8a;
+      --purple-light: #ede8f7;
+      --teal: #2a7a6e;
+      --teal-light: #e0f2ef;
+      --amber: #c8711a;
+      --amber-light: #fdf0e0;
+      --red: #b84040;
+      --red-light: #fdeaea;
+      --border: #ddd6cc;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--cream);
+      background: var(--bg);
       color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.65;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
     }
 
-    /* HERO */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247,243,238,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .nav-brand {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      color: var(--purple);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--purple); }
+
     .hero {
-      background: var(--ink);
-      color: var(--cream);
-      padding: 3rem 1.5rem 2.5rem;
+      min-height: 92vh;
+      display: grid;
+      place-items: center;
       text-align: center;
+      padding: 5rem 1.5rem 4rem;
       position: relative;
       overflow: hidden;
     }
-    .hero::before {
-      content: '';
+    .hero-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 60% 0%, #3a2a10 0%, transparent 70%);
-      pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, #e8e0f4 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 80% 90%, #d8ede9 0%, transparent 55%),
+        var(--bg);
+      z-index: 0;
     }
-    .hero-tag {
+    .hero-content { position: relative; z-index: 1; max-width: 720px; }
+
+    .hero-eyebrow {
       display: inline-block;
-      background: var(--accent);
-      color: #fff;
       font-size: 0.72rem;
       font-weight: 500;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      padding: 0.3em 0.9em;
+      color: var(--purple);
+      border: 1px solid #c4b8e8;
+      background: var(--purple-light);
+      padding: 0.35em 1em;
       border-radius: 2em;
-      margin-bottom: 1.2rem;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
     }
     .hero h1 {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(2rem, 6vw, 3rem);
-      font-weight: 300;
-      line-height: 1.2;
-      margin-bottom: 0.5rem;
+      font-family: 'Lora', serif;
+      font-size: clamp(2.4rem, 7vw, 4rem);
+      font-weight: 400;
+      line-height: 1.18;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+      opacity: 0;
     }
-    .hero h1 em {
-      font-style: italic;
-      color: #f0c89a;
+    .hero h1 em { font-style: italic; color: var(--purple); }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+      opacity: 0;
     }
-    .hero-sub {
-      font-size: 1rem;
-      color: #c8bfb0;
-      max-width: 480px;
-      margin: 0.75rem auto 0;
+    .hero-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+      opacity: 0;
     }
-
-    /* EMERGENCY BANNER */
-    .emergency-banner {
-      background: var(--accent);
-      color: #fff;
-      padding: 1rem 1.5rem;
-      text-align: center;
-      font-size: 0.95rem;
-      font-weight: 500;
-    }
-    .emergency-banner a {
-      color: #fff;
-      font-weight: 700;
-      font-size: 1.1rem;
-      text-decoration: none;
+    .btn {
       display: inline-block;
-      margin-top: 0.25rem;
+      padding: 0.7em 1.6em;
+      border-radius: 2em;
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+    .btn-primary { background: var(--purple); color: #fff; }
+    .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--ink); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      animation: fadeUp 0.6s 0.6s ease both;
+      opacity: 0;
+    }
+    .scroll-arrow {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--muted), transparent);
+      animation: scrollPulse 2s ease infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
     }
 
-    /* LAYOUT */
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
 
-    section {
-      padding: 2.5rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    section:last-child { border-bottom: none; }
+    section { padding: 5rem 0; }
+    section + section { border-top: 1px solid var(--border); }
 
     .section-label {
       font-size: 0.7rem;
       font-weight: 500;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
-    }
-
-    h2 {
-      font-family: 'Fraunces', serif;
-      font-weight: 600;
-      font-size: 1.6rem;
-      line-height: 1.25;
+      color: var(--purple);
       margin-bottom: 1rem;
     }
-
-    p { color: var(--muted); margin-bottom: 0.75rem; }
+    h2 {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+    h2 em { font-style: italic; color: var(--muted); }
+    p { color: var(--muted); margin-bottom: 1rem; }
     p:last-child { margin-bottom: 0; }
+    strong { color: var(--ink); font-weight: 500; }
 
-    /* STEP CARDS */
-    .steps { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 1.25rem; }
-
-    .step {
-      display: flex;
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1rem;
-      align-items: flex-start;
-      background: var(--warm-white);
+      margin-top: 2rem;
+    }
+    .fact-card {
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem 1.1rem;
-      box-shadow: var(--shadow);
+      border-radius: 14px;
+      padding: 1.4rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .fact-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.07); }
+    .fact-icon { font-size: 1.6rem; margin-bottom: 0.6rem; display: block; }
+    .fact-card h3 { font-size: 0.82rem; font-weight: 500; color: var(--purple); margin-bottom: 0.3rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    .fact-card p { font-size: 0.88rem; margin: 0; }
+
+    .symptoms-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 580px) { .symptoms-layout { grid-template-columns: 1fr; } }
+    .symptom-group h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--ink);
+    }
+    .symptom-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .symptom-list li { font-size: 0.9rem; color: var(--muted); display: flex; align-items: flex-start; gap: 0.5rem; }
+    .symptom-list li::before { content: '–'; color: var(--purple); flex-shrink: 0; }
+
+    .trigger-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2em;
+      padding: 0.4em 1em;
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
     }
 
-    .step-num {
-      flex-shrink: 0;
-      width: 2rem;
-      height: 2rem;
+    .steps-layout {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2rem;
+      position: relative;
+    }
+    .steps-layout::before {
+      content: '';
+      position: absolute;
+      left: 1.35rem;
+      top: 2rem;
+      bottom: 2rem;
+      width: 1px;
+      background: var(--border);
+    }
+    .step-row { display: flex; gap: 1.25rem; align-items: flex-start; padding: 1rem 0; }
+    .step-dot {
+      width: 2.7rem;
+      height: 2.7rem;
       border-radius: 50%;
-      background: var(--ink);
-      color: var(--cream);
-      font-family: 'Fraunces', serif;
-      font-size: 1rem;
+      background: var(--surface);
+      border: 2px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 0.1rem;
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      color: var(--purple);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
     }
+    .step-row.urgent .step-dot { background: var(--red-light); border-color: var(--red); color: var(--red); }
+    .step-text strong { display: block; font-size: 0.95rem; font-weight: 500; color: var(--ink); margin-bottom: 0.2rem; }
+    .step-text p { font-size: 0.88rem; margin: 0; }
 
-    .step-body strong {
-      display: block;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.2rem;
+    .dds { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem; }
+    @media (max-width: 500px) { .dds { grid-template-columns: 1fr; } }
+    .dd-box { border-radius: 14px; padding: 1.4rem; border: 1px solid; }
+    .dd-box.do { background: var(--teal-light); border-color: #a8d8d0; }
+    .dd-box.dont { background: var(--red-light); border-color: #f0baba; }
+    .dd-box h3 { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.9rem; }
+    .dd-box.do h3 { color: var(--teal); }
+    .dd-box.dont h3 { color: var(--red); }
+    .dd-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .dd-box li { font-size: 0.88rem; color: var(--muted); display: flex; gap: 0.5rem; align-items: flex-start; }
+    .dd-box.do li::before { content: '✓'; color: var(--teal); font-weight: 600; flex-shrink: 0; }
+    .dd-box.dont li::before { content: '✕'; color: var(--red); font-weight: 600; flex-shrink: 0; }
+
+    .med-block {
+      background: var(--amber-light);
+      border: 1.5px solid #e8c080;
+      border-radius: 16px;
+      padding: 1.75rem;
+      margin-top: 2rem;
     }
-    .step-body span { font-size: 0.88rem; color: var(--muted); }
+    .med-block h3 { font-family: 'Lora', serif; font-size: 1.25rem; font-weight: 400; margin-bottom: 0.25rem; color: var(--ink); }
+    .med-sub { font-size: 0.8rem; color: var(--amber); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.1rem; }
+    .med-rows { display: flex; flex-direction: column; gap: 0.6rem; }
+    .med-row { display: flex; gap: 0.75rem; font-size: 0.9rem; }
+    .med-row-label { font-weight: 500; color: var(--ink); min-width: 100px; flex-shrink: 0; }
+    .med-row-val { color: var(--muted); }
+    .med-warning { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e8c080; font-size: 0.82rem; color: var(--amber); }
 
-    /* CALL 911 step */
-    .step.urgent { border-color: var(--accent); background: var(--warn-light); }
-    .step.urgent .step-num { background: var(--accent); }
-
-    /* DO / DON'T */
-    .dos-donts {
+    .living-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1rem;
-      margin-top: 1.25rem;
+      margin-top: 2rem;
     }
-    @media (max-width: 500px) { .dos-donts { grid-template-columns: 1fr; } }
+    .living-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem 1.4rem; }
+    .lc-icon { font-size: 1.5rem; margin-bottom: 0.75rem; display: block; }
+    .living-card h3 { font-size: 0.92rem; font-weight: 500; color: var(--ink); margin-bottom: 0.4rem; }
+    .living-card p { font-size: 0.85rem; margin: 0; }
 
-    .do-card, .dont-card {
-      border-radius: 12px;
-      padding: 1rem 1.1rem;
-      border: 1px solid;
-    }
-    .do-card {
-      background: var(--safe-light);
-      border-color: #a8dcc0;
-    }
-    .dont-card {
-      background: var(--warn-light);
-      border-color: #f0b8a0;
-    }
-
-    .do-card h3, .dont-card h3 {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
-    .do-card h3 { color: var(--safe); }
-    .dont-card h3 { color: var(--warn); }
-
-    .do-card ul, .dont-card ul {
-      list-style: none;
-      font-size: 0.88rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-    }
-    .do-card li::before { content: '✓ '; color: var(--safe); font-weight: 700; }
-    .dont-card li::before { content: '✕ '; color: var(--warn); font-weight: 700; }
-
-    /* RESCUE MED */
-    .med-card {
-      background: var(--warm-white);
-      border: 2px solid var(--accent);
-      border-radius: 14px;
-      padding: 1.25rem 1.4rem;
-      margin-top: 1.25rem;
-      box-shadow: var(--shadow);
-    }
-    .med-card h3 {
-      font-family: 'Fraunces', serif;
-      font-size: 1.15rem;
-      margin-bottom: 0.5rem;
-    }
-    .med-card p { font-size: 0.9rem; }
-    .med-note {
-      margin-top: 0.75rem;
-      font-size: 0.82rem;
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    /* ABOUT DRAVET */
-    .about-box {
-      background: var(--warm-white);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.4rem;
-      margin-top: 1.25rem;
-    }
-    .about-box p { font-size: 0.9rem; }
-
-    /* CONTACT */
-    .contact-card {
-      background: var(--ink);
-      color: var(--cream);
-      border-radius: 14px;
-      padding: 1.4rem;
-      margin-top: 1.25rem;
-    }
-    .contact-card .name {
-      font-family: 'Fraunces', serif;
-      font-size: 1.2rem;
-      margin-bottom: 0.2rem;
-    }
-    .contact-card .role { font-size: 0.82rem; color: #a09080; margin-bottom: 0.75rem; }
-    .contact-card a {
-      display: inline-block;
-      color: #f0c89a;
-      font-size: 1.05rem;
-      font-weight: 500;
-      text-decoration: none;
-    }
-
-    /* FOOTER */
-    footer {
+    .pull-quote {
       text-align: center;
-      padding: 2rem 1.5rem;
-      font-size: 0.8rem;
-      color: var(--muted);
+      padding: 4rem 1.5rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
+    .pull-quote blockquote {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: clamp(1.25rem, 3vw, 1.7rem);
+      color: var(--ink);
+      max-width: 620px;
+      margin: 0 auto 1rem;
+      line-height: 1.5;
+    }
+    .pull-quote cite { font-size: 0.82rem; color: var(--muted); font-style: normal; letter-spacing: 0.06em; }
 
-    /* ANIMATIONS */
+    .resource-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.75rem; }
+    .resource-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .resource-item:hover { transform: translateX(4px); border-color: var(--purple); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .resource-item h3 { font-size: 0.92rem; font-weight: 500; color: var(--ink); }
+    .resource-item p { font-size: 0.82rem; margin: 0; }
+    .resource-arrow { color: var(--purple); font-size: 1.1rem; flex-shrink: 0; }
+
+    .contact-strip {
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: 18px;
+      padding: 2rem;
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .contact-strip h3 { font-family: 'Lora', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.25rem; color: var(--bg); }
+    .contact-strip p { font-size: 0.85rem; color: #a09080; margin: 0; }
+    .contact-strip a {
+      display: inline-block;
+      background: var(--bg);
+      color: var(--ink);
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.65em 1.5em;
+      border-radius: 2em;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .contact-strip a:hover { background: #fff; }
+
+    footer { text-align: center; padding: 3rem 1.5rem; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--border); }
+    footer a { color: var(--purple); text-decoration: none; }
+
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .hero, .emergency-banner { animation: fadeUp 0.5s ease both; }
-    section { animation: fadeUp 0.5s ease both; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
 
+  <nav>
+    <a class="nav-brand" href="#">Dravet Syndrome</a>
+    <ul class="nav-links">
+      <li><a href="#what-is">What Is It</a></li>
+      <li><a href="#symptoms">Symptoms</a></li>
+      <li><a href="#seizure">During a Seizure</a></li>
+      <li><a href="#living">Living With It</a></li>
+      <li><a href="#resources">Resources</a></li>
+    </ul>
+  </nav>
+
   <div class="hero">
-    <div class="hero-tag">Medical Info</div>
-    <h1>Hi, I'm <em>[Child's Name]</em>.<br>I have Dravet Syndrome.</h1>
-    <p class="hero-sub">If I'm having a seizure, this page will tell you exactly what to do. Please read it — it only takes a minute.</p>
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Rare Epilepsy Awareness</span>
+      <h1>Understanding<br><em>Dravet Syndrome</em></h1>
+      <p class="hero-desc">A rare, lifelong form of epilepsy affecting roughly 1 in 15,700 people. This page exists to answer the questions people always ask — and to help bystanders know what to do.</p>
+      <div class="hero-actions">
+        <a href="#what-is" class="btn btn-primary">Learn About Dravet</a>
+        <a href="#seizure" class="btn btn-outline">What To Do During a Seizure</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
   </div>
 
-  <div class="emergency-banner">
-    Emergency contact: <a href="tel:+15550000000">[Parent Name] — (555) 000-0000</a>
+  <!-- WHAT IS IT -->
+  <section id="what-is">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">The Basics</div>
+        <h2>What is <em>Dravet Syndrome?</em></h2>
+        <p>Dravet Syndrome is a rare, severe form of epilepsy that begins in the first year of life — typically in an otherwise healthy infant. It was first described by Dr. Charlotte Dravet in 1978 and was known for years as "Severe Myoclonic Epilepsy of Infancy."</p>
+        <p>In most cases it's caused by a mutation in the <strong>SCN1A gene</strong>, which plays a critical role in how the brain regulates electrical signals. When this gene doesn't function correctly, the brain becomes prone to seizures that are difficult to control with standard medications.</p>
+        <p>Dravet is not degenerative — the brain does not worsen over time — but it is lifelong, and its effects on development, cognition, and behavior can be significant and vary widely from person to person.</p>
+      </div>
+      <div class="fact-grid reveal">
+        <div class="fact-card">
+          <span class="fact-icon">🧬</span>
+          <h3>Cause</h3>
+          <p>A mutation in the SCN1A gene, usually occurring spontaneously — not typically inherited from parents.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-icon">📊</span>
+          <h3>Prevalence</h3>
+          <p>Affects approximately 1 in 15,700 people. Rare, but thousands of families are living with it right now.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-icon">🗓️</span>
+          <h3>Onset</h3>
+          <p>First seizures typically appear between 5 and 12 months of age, often triggered by fever or warm temperatures.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-icon">💊</span>
+          <h3>Treatment</h3>
+          <p>No cure exists, but seizures can be managed with medications, dietary therapy, and lifestyle adjustments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYMPTOMS -->
+  <section id="symptoms">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">What It Looks Like</div>
+        <h2>Symptoms &amp; <em>Characteristics</em></h2>
+        <p>Dravet presents differently from person to person, and even day to day. Seizures are the most visible symptom, but they're rarely the whole picture.</p>
+      </div>
+      <div class="symptoms-layout reveal">
+        <div class="symptom-group">
+          <h3>Seizure Types</h3>
+          <ul class="symptom-list">
+            <li>Prolonged febrile convulsions (early on)</li>
+            <li>Tonic-clonic (grand mal) seizures</li>
+            <li>Myoclonic jerks — brief muscle twitches</li>
+            <li>Absence seizures — staring, unresponsive</li>
+            <li>Focal seizures affecting one side of the body</li>
+            <li>Status epilepticus — seizures lasting 30+ minutes</li>
+          </ul>
+        </div>
+        <div class="symptom-group">
+          <h3>Developmental Impact</h3>
+          <ul class="symptom-list">
+            <li>Delayed language and motor development</li>
+            <li>Cognitive and learning difficulties</li>
+            <li>Behavioral challenges (hyperactivity, impulsivity)</li>
+            <li>Autism spectrum traits in some individuals</li>
+            <li>Sleep disturbances</li>
+            <li>Balance and coordination issues (ataxia)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="reveal" style="margin-top: 2.5rem;">
+        <h3 style="font-family:'Lora',serif;font-size:1.1rem;font-weight:400;margin-bottom:0.75rem;color:var(--ink);">Common Seizure Triggers</h3>
+        <div class="trigger-pills">
+          <div class="pill"><span>🌡️</span> Fever or illness</div>
+          <div class="pill"><span>☀️</span> Heat or hot environments</div>
+          <div class="pill"><span>🏊</span> Warm baths or pools</div>
+          <div class="pill"><span>💡</span> Flashing or flickering lights</div>
+          <div class="pill"><span>😴</span> Overtiredness or poor sleep</div>
+          <div class="pill"><span>⚡</span> Excitement or stress</div>
+          <div class="pill"><span>🏃</span> Physical exertion</div>
+          <div class="pill"><span>🌊</span> Visual patterns</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote reveal">
+    <blockquote>"Having Dravet Syndrome doesn't define who my child is — it's just one part of our story."</blockquote>
+    <cite>— [FAMILY NAME] FAMILY &nbsp;·&nbsp; Replace this with your own words</cite>
   </div>
 
-  <div class="container">
-
-    <!-- WHAT TO DO -->
-    <section>
-      <div class="section-label">If I'm seizing right now</div>
-      <h2>Here's what to do, step by step.</h2>
-      <p>Stay calm. Most seizures pass on their own. Your presence matters more than anything else.</p>
-
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-body">
-            <strong>Stay with me</strong>
-            <span>Do not leave me alone. Keep others back and give me space.</span>
+  <!-- WHAT TO DO -->
+  <section id="seizure">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">For Bystanders</div>
+        <h2>What to do <em>during a seizure</em></h2>
+        <p>If you're witnessing a seizure for the first time, it can be frightening. Most seizures pass on their own. Here's exactly what to do.</p>
+      </div>
+      <div class="steps-layout reveal">
+        <div class="step-row">
+          <div class="step-dot">1</div>
+          <div class="step-text">
+            <strong>Stay calm and stay with them</strong>
+            <p>Your presence matters. Don't leave them alone. Keep bystanders back to give space.</p>
           </div>
         </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-body">
-            <strong>Keep me safe from harm</strong>
-            <span>Clear hard or sharp objects away. Cushion my head with something soft if you can.</span>
+        <div class="step-row">
+          <div class="step-dot">2</div>
+          <div class="step-text">
+            <strong>Clear the area of hazards</strong>
+            <p>Move hard or sharp objects away. Cushion their head gently if they're on the ground.</p>
           </div>
         </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-body">
-            <strong>Turn me on my side</strong>
-            <span>Gently roll me onto my side (recovery position) to keep my airway clear.</span>
+        <div class="step-row">
+          <div class="step-dot">3</div>
+          <div class="step-text">
+            <strong>Turn them onto their side</strong>
+            <p>The recovery position keeps the airway clear. Guide gently — don't force it.</p>
           </div>
         </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-body">
-            <strong>Note the time</strong>
-            <span>Check when the seizure started. If it lasts more than 5 minutes, see the rescue medication section below.</span>
+        <div class="step-row">
+          <div class="step-dot">4</div>
+          <div class="step-text">
+            <strong>Note the time the seizure started</strong>
+            <p>Duration is critical information for their family and any medical responders.</p>
           </div>
         </div>
-        <div class="step urgent">
-          <div class="step-num">!</div>
-          <div class="step-body">
+        <div class="step-row">
+          <div class="step-dot">5</div>
+          <div class="step-text">
+            <strong>Contact their family</strong>
+            <p>Reach the emergency contact listed on this page or their medical ID as soon as it's safe.</p>
+          </div>
+        </div>
+        <div class="step-row urgent">
+          <div class="step-dot">!</div>
+          <div class="step-text">
             <strong>Call 911 if the seizure lasts more than 5 minutes</strong>
-            <span>Or if I stop breathing, don't regain consciousness, or have a second seizure right after.</span>
+            <p>Also call if they stop breathing, don't regain consciousness, or have back-to-back seizures.</p>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- DO / DON'T -->
-    <section>
-      <div class="section-label">Important</div>
-      <h2>Do's and Don'ts</h2>
-      <div class="dos-donts">
-        <div class="do-card">
+      <div class="dds reveal">
+        <div class="dd-box do">
           <h3>Do</h3>
           <ul>
-            <li>Stay calm and stay with me</li>
-            <li>Time the seizure</li>
-            <li>Turn me on my side</li>
-            <li>Speak calmly and reassuringly</li>
-            <li>Call my parent when it's safe</li>
+            <li>Stay calm and stay present</li>
+            <li>Time the seizure from the start</li>
+            <li>Turn them gently onto their side</li>
+            <li>Cushion their head</li>
+            <li>Speak calmly — they may hear you</li>
+            <li>Stay until they are fully alert</li>
           </ul>
         </div>
-        <div class="dont-card">
+        <div class="dd-box dont">
           <h3>Don't</h3>
           <ul>
-            <li>Put anything in my mouth</li>
-            <li>Restrain my movements</li>
-            <li>Give me food or water</li>
-            <li>Leave me alone</li>
-            <li>Panic — I've been through this before</li>
+            <li>Put anything in their mouth</li>
+            <li>Restrain their movements</li>
+            <li>Give food or water during the seizure</li>
+            <li>Leave them alone</li>
+            <li>Try to "wake them up" forcefully</li>
+            <li>Assume they're fine just because it stopped</li>
           </ul>
         </div>
       </div>
-    </section>
-
-    <!-- RESCUE MED -->
-    <section>
-      <div class="section-label">Rescue medication</div>
-      <h2>I may carry a rescue medication.</h2>
-      <div class="med-card">
-        <h3>[Medication Name, e.g. Diastat / Midazolam]</h3>
-        <p><strong>When to give it:</strong> If the seizure lasts more than [X] minutes, or as directed by my parents.</p>
-        <p><strong>Where it is:</strong> [e.g., in my bag, blue pouch on my belt]</p>
-        <p><strong>How to give it:</strong> [Instructions — e.g., "Nasal spray: one spray in each nostril."]</p>
-        <p class="med-note">⚠ Only give rescue medication if you've been instructed by my parent or a medical professional. Then call 911.</p>
+      <div class="reveal" style="margin-top:2.5rem;">
+        <div class="section-label">Rescue Medication</div>
+        <h2 style="font-size:1.4rem;">They may carry a rescue medication</h2>
+        <div class="med-block">
+          <h3>[Medication Name]</h3>
+          <div class="med-sub">Rescue medication — only administer as instructed</div>
+          <div class="med-rows">
+            <div class="med-row">
+              <span class="med-row-label">When to give</span>
+              <span class="med-row-val">If the seizure lasts more than [X] minutes, or as directed by the family.</span>
+            </div>
+            <div class="med-row">
+              <span class="med-row-label">Where it is</span>
+              <span class="med-row-val">[e.g., in their bag, blue pouch, fanny pack]</span>
+            </div>
+            <div class="med-row">
+              <span class="med-row-label">How to give</span>
+              <span class="med-row-val">[e.g., nasal spray — one spray per nostril. Full instructions on packaging.]</span>
+            </div>
+          </div>
+          <p class="med-warning">⚠ Only give rescue medication if instructed by the family or a medical professional. After giving it, call 911.</p>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ABOUT DRAVET -->
-    <section>
-      <div class="section-label">What is Dravet Syndrome?</div>
-      <h2>A quick explanation.</h2>
-      <div class="about-box">
-        <p>Dravet Syndrome is a rare, lifelong form of epilepsy that begins in the first year of life. It's caused by a mutation in the <strong>SCN1A gene</strong>, which affects how the brain regulates electrical activity.</p>
-        <p>Seizures in Dravet can be triggered by fever, heat, excitement, or they can happen with no warning at all. They can look different each time — some involve convulsions, others are more subtle.</p>
-        <p>I am not in constant danger. I live a full life. But when a seizure happens, knowing what to do makes a real difference.</p>
+  <!-- LIVING WITH -->
+  <section id="living">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Day to Day</div>
+        <h2>What life with Dravet <em>actually looks like</em></h2>
+        <p>Dravet Syndrome is a 24/7 condition — but life doesn't stop. Families learn to adapt, plan ahead, and advocate fiercely. Here's a glimpse into what living with Dravet involves day to day.</p>
       </div>
-    </section>
+      <div class="living-grid reveal">
+        <div class="living-card">
+          <span class="lc-icon">🌡️</span>
+          <h3>Temperature Management</h3>
+          <p>Fever and heat are among the most reliable seizure triggers. Families monitor temperature constantly and act fast when illness strikes.</p>
+        </div>
+        <div class="living-card">
+          <span class="lc-icon">💊</span>
+          <h3>Complex Medication Regimens</h3>
+          <p>Most people with Dravet are on multiple seizure medications simultaneously, with careful monitoring for side effects and interactions.</p>
+        </div>
+        <div class="living-card">
+          <span class="lc-icon">🏫</span>
+          <h3>School &amp; Learning Support</h3>
+          <p>Individualized education plans, aides, and adapted learning environments are often a necessary part of the picture.</p>
+        </div>
+        <div class="living-card">
+          <span class="lc-icon">🌙</span>
+          <h3>Nighttime Monitoring</h3>
+          <p>Seizures can occur during sleep. Many families use monitors, pulse oximeters, or stay in the same room for safety.</p>
+        </div>
+        <div class="living-card">
+          <span class="lc-icon">🏥</span>
+          <h3>Specialist Care Team</h3>
+          <p>Neurologists, developmental pediatricians, therapists, and dietitians may all be part of an ongoing care team.</p>
+        </div>
+        <div class="living-card">
+          <span class="lc-icon">❤️</span>
+          <h3>Community &amp; Advocacy</h3>
+          <p>The Dravet community is small but fierce. Families advocate for research, awareness, and each other in powerful ways.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- CONTACT -->
-    <section>
-      <div class="section-label">Emergency contact</div>
-      <h2>Reach my family.</h2>
-      <div class="contact-card">
-        <div class="name">[Parent / Guardian Name]</div>
-        <div class="role">Parent — primary contact</div>
+  <!-- RESOURCES -->
+  <section id="resources">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Learn More</div>
+        <h2>Helpful <em>Resources</em></h2>
+        <p>These organizations are doing the real work — funding research, supporting families, and pushing for better treatments.</p>
+      </div>
+      <div class="resource-list reveal">
+        <a class="resource-item" href="https://www.dravetfoundation.org" target="_blank" rel="noopener">
+          <div>
+            <h3>Dravet Syndrome Foundation</h3>
+            <p>The leading US organization — research funding, family support, and awareness.</p>
+          </div>
+          <span class="resource-arrow">→</span>
+        </a>
+        <a class="resource-item" href="https://www.dravet.org.uk" target="_blank" rel="noopener">
+          <div>
+            <h3>Dravet Syndrome UK</h3>
+            <p>UK-based charity providing resources, research support, and a connected community.</p>
+          </div>
+          <span class="resource-arrow">→</span>
+        </a>
+        <a class="resource-item" href="https://www.epilepsy.com/learn/types-epilepsy-syndromes/dravet-syndrome" target="_blank" rel="noopener">
+          <div>
+            <h3>Epilepsy Foundation — Dravet Overview</h3>
+            <p>Clear, medically reviewed information about diagnosis, treatment, and daily life.</p>
+          </div>
+          <span class="resource-arrow">→</span>
+        </a>
+        <a class="resource-item" href="https://rarediseases.org/rare-diseases/dravet-syndrome/" target="_blank" rel="noopener">
+          <div>
+            <h3>NORD — National Organization for Rare Disorders</h3>
+            <p>In-depth clinical information and patient registry data.</p>
+          </div>
+          <span class="resource-arrow">→</span>
+        </a>
+      </div>
+      <div class="contact-strip reveal">
+        <div>
+          <h3>[Parent / Guardian Name]</h3>
+          <p>Primary emergency contact — call anytime if you witness a seizure</p>
+        </div>
         <a href="tel:+15550000000">(555) 000-0000</a>
       </div>
-    </section>
-
-  </div>
+    </div>
+  </section>
 
   <footer>
-    Made with love for <strong>[Child's Name]</strong> and their family.<br>
-    For more information: <a href="https://www.dravetfoundation.org" target="_blank" style="color:var(--accent)">dravetfoundation.org</a>
+    <p>Made with love for the <strong>[Family Name]</strong> family.</p>
+    <p style="margin-top:0.4rem;">Not a substitute for medical advice. In an emergency, call 911.</p>
   </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
