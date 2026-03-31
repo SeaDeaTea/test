@@ -1,23 +1,420 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dravet Syndrome — Emergency Info</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,300&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #fdf8f2;
+      --warm-white: #fff9f4;
+      --ink: #1a1208;
+      --muted: #6b5e4e;
+      --accent: #d95f2b;
+      --accent-light: #f4e4d8;
+      --safe: #2a7a4b;
+      --safe-light: #d8f0e3;
+      --warn: #b84a1e;
+      --warn-light: #fdeee8;
+      --border: #e8ddd0;
+      --shadow: 0 2px 16px rgba(26,18,8,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 0%, #3a2a10 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3em 0.9em;
+      border-radius: 2em;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: #f0c89a;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: #c8bfb0;
+      max-width: 480px;
+      margin: 0.75rem auto 0;
+    }
+
+    /* EMERGENCY BANNER */
+    .emergency-banner {
+      background: var(--accent);
+      color: #fff;
+      padding: 1rem 1.5rem;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .emergency-banner a {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 0.25rem;
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    section {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    section:last-child { border-bottom: none; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      font-size: 1.6rem;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+
+    p { color: var(--muted); margin-bottom: 0.75rem; }
+    p:last-child { margin-bottom: 0; }
+
+    /* STEP CARDS */
+    .steps { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 1.25rem; }
+
+    .step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.1rem;
+    }
+
+    .step-body strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+    .step-body span { font-size: 0.88rem; color: var(--muted); }
+
+    /* CALL 911 step */
+    .step.urgent { border-color: var(--accent); background: var(--warn-light); }
+    .step.urgent .step-num { background: var(--accent); }
+
+    /* DO / DON'T */
+    .dos-donts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    @media (max-width: 500px) { .dos-donts { grid-template-columns: 1fr; } }
+
+    .do-card, .dont-card {
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      border: 1px solid;
+    }
+    .do-card {
+      background: var(--safe-light);
+      border-color: #a8dcc0;
+    }
+    .dont-card {
+      background: var(--warn-light);
+      border-color: #f0b8a0;
+    }
+
+    .do-card h3, .dont-card h3 {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .do-card h3 { color: var(--safe); }
+    .dont-card h3 { color: var(--warn); }
+
+    .do-card ul, .dont-card ul {
+      list-style: none;
+      font-size: 0.88rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .do-card li::before { content: '✓ '; color: var(--safe); font-weight: 700; }
+    .dont-card li::before { content: '✕ '; color: var(--warn); font-weight: 700; }
+
+    /* RESCUE MED */
+    .med-card {
+      background: var(--warm-white);
+      border: 2px solid var(--accent);
+      border-radius: 14px;
+      padding: 1.25rem 1.4rem;
+      margin-top: 1.25rem;
+      box-shadow: var(--shadow);
+    }
+    .med-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+    }
+    .med-card p { font-size: 0.9rem; }
+    .med-note {
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ABOUT DRAVET */
+    .about-box {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin-top: 1.25rem;
+    }
+    .about-box p { font-size: 0.9rem; }
+
+    /* CONTACT */
+    .contact-card {
+      background: var(--ink);
+      color: var(--cream);
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin-top: 1.25rem;
+    }
+    .contact-card .name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
+    }
+    .contact-card .role { font-size: 0.82rem; color: #a09080; margin-bottom: 0.75rem; }
+    .contact-card a {
+      display: inline-block;
+      color: #f0c89a;
+      font-size: 1.05rem;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero, .emergency-banner { animation: fadeUp 0.5s ease both; }
+    section { animation: fadeUp 0.5s ease both; }
+  </style>
 </head>
 <body>
-    <div>
-   <h1>Banner</h1>
-        <button id="menu">Menu</button>
-    </div>
 
+  <div class="hero">
+    <div class="hero-tag">Medical Info</div>
+    <h1>Hi, I'm <em>[Child's Name]</em>.<br>I have Dravet Syndrome.</h1>
+    <p class="hero-sub">If I'm having a seizure, this page will tell you exactly what to do. Please read it — it only takes a minute.</p>
+  </div>
 
-    <script>
-        let btn = document.getElementById('menu');
+  <div class="emergency-banner">
+    Emergency contact: <a href="tel:+15550000000">[Parent Name] — (555) 000-0000</a>
+  </div>
 
-        btn.addEventListener('click', function() {
-            alert("Hello World")
-        })
-    </script>
+  <div class="container">
+
+    <!-- WHAT TO DO -->
+    <section>
+      <div class="section-label">If I'm seizing right now</div>
+      <h2>Here's what to do, step by step.</h2>
+      <p>Stay calm. Most seizures pass on their own. Your presence matters more than anything else.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Stay with me</strong>
+            <span>Do not leave me alone. Keep others back and give me space.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Keep me safe from harm</strong>
+            <span>Clear hard or sharp objects away. Cushion my head with something soft if you can.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>Turn me on my side</strong>
+            <span>Gently roll me onto my side (recovery position) to keep my airway clear.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <strong>Note the time</strong>
+            <span>Check when the seizure started. If it lasts more than 5 minutes, see the rescue medication section below.</span>
+          </div>
+        </div>
+        <div class="step urgent">
+          <div class="step-num">!</div>
+          <div class="step-body">
+            <strong>Call 911 if the seizure lasts more than 5 minutes</strong>
+            <span>Or if I stop breathing, don't regain consciousness, or have a second seizure right after.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DO / DON'T -->
+    <section>
+      <div class="section-label">Important</div>
+      <h2>Do's and Don'ts</h2>
+      <div class="dos-donts">
+        <div class="do-card">
+          <h3>Do</h3>
+          <ul>
+            <li>Stay calm and stay with me</li>
+            <li>Time the seizure</li>
+            <li>Turn me on my side</li>
+            <li>Speak calmly and reassuringly</li>
+            <li>Call my parent when it's safe</li>
+          </ul>
+        </div>
+        <div class="dont-card">
+          <h3>Don't</h3>
+          <ul>
+            <li>Put anything in my mouth</li>
+            <li>Restrain my movements</li>
+            <li>Give me food or water</li>
+            <li>Leave me alone</li>
+            <li>Panic — I've been through this before</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESCUE MED -->
+    <section>
+      <div class="section-label">Rescue medication</div>
+      <h2>I may carry a rescue medication.</h2>
+      <div class="med-card">
+        <h3>[Medication Name, e.g. Diastat / Midazolam]</h3>
+        <p><strong>When to give it:</strong> If the seizure lasts more than [X] minutes, or as directed by my parents.</p>
+        <p><strong>Where it is:</strong> [e.g., in my bag, blue pouch on my belt]</p>
+        <p><strong>How to give it:</strong> [Instructions — e.g., "Nasal spray: one spray in each nostril."]</p>
+        <p class="med-note">⚠ Only give rescue medication if you've been instructed by my parent or a medical professional. Then call 911.</p>
+      </div>
+    </section>
+
+    <!-- ABOUT DRAVET -->
+    <section>
+      <div class="section-label">What is Dravet Syndrome?</div>
+      <h2>A quick explanation.</h2>
+      <div class="about-box">
+        <p>Dravet Syndrome is a rare, lifelong form of epilepsy that begins in the first year of life. It's caused by a mutation in the <strong>SCN1A gene</strong>, which affects how the brain regulates electrical activity.</p>
+        <p>Seizures in Dravet can be triggered by fever, heat, excitement, or they can happen with no warning at all. They can look different each time — some involve convulsions, others are more subtle.</p>
+        <p>I am not in constant danger. I live a full life. But when a seizure happens, knowing what to do makes a real difference.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section>
+      <div class="section-label">Emergency contact</div>
+      <h2>Reach my family.</h2>
+      <div class="contact-card">
+        <div class="name">[Parent / Guardian Name]</div>
+        <div class="role">Parent — primary contact</div>
+        <a href="tel:+15550000000">(555) 000-0000</a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    Made with love for <strong>[Child's Name]</strong> and their family.<br>
+    For more information: <a href="https://www.dravetfoundation.org" target="_blank" style="color:var(--accent)">dravetfoundation.org</a>
+  </footer>
+
 </body>
 </html>
